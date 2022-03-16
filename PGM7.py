@@ -1,7 +1,4 @@
-#Apply EM algorithm to cluster a set of data stored in a .CSV file. Use the same data set
-#for clustering using k-Means algorithm. Compare the results of these two algorithms and
-#comment on the quality of clustering. You can add Java/Python ML library classes/API in
-#the program.
+
 
 import matplotlib.pyplot as plt
 from sklearn import datasets
@@ -24,7 +21,7 @@ def rename(s):
 	
 	return s
 
-# import some data to play with
+
 iris = datasets.load_iris()
 
 print("\n IRIS DATA :",iris.data);
@@ -33,24 +30,23 @@ print("\n IRIS TARGET  :\n",iris.target)
 print("\n IRIS TARGET NAMES:\n",iris.target_names)
 
 
-# Store the inputs as a Pandas Dataframe and set the column names
+
 X = pd.DataFrame(iris.data)
 
-#print(X)
+
 X.columns = ['Sepal_Length','Sepal_Width','Petal_Length','Petal_Width']
 
-#print(X.columns) #print("X:",x)
-#print("Y:",y)
+
 y = pd.DataFrame(iris.target)
 y.columns = ['Targets']
 
-# Set the size of the plot
+
 plt.figure(figsize=(14,7))
 
-# Create a colormap
+
 colormap = np.array(['red', 'lime', 'black'])
 
-# Plot Sepal
+
 plt.subplot(1,2,1)
 plt.scatter(X.Sepal_Length,X.Sepal_Width, c=colormap[y.Targets], s=40)
 plt.title('Sepal')
@@ -62,22 +58,22 @@ plt.show()
 
 print("Actual Target is:\n", iris.target)
 
-# K Means Cluster
+
 model = KMeans(n_clusters=3)
 model.fit(X)
 
-# Set the size of the plot
+
 plt.figure(figsize=(14,7))
 
-# Create a colormap
+
 colormap = np.array(['red', 'lime', 'black'])
 
-# Plot the Original Classifications
+
 plt.subplot(1,2,1)
 plt.scatter(X.Petal_Length, X.Petal_Width, c=colormap[y.Targets], s=40)
 plt.title('Real Classification')
 
-# Plot the Models Classifications
+
 plt.subplot(1,2,2)
 plt.scatter(X.Petal_Length, X.Petal_Width, c=colormap[model.labels_], s=40)
 plt.title('K Mean Classification')
@@ -88,8 +84,7 @@ print("\nWhat KMeans thought: \n", km)
 print("Accuracy of KMeans is ",sm.accuracy_score(y, km))
 print("Confusion Matrix for KMeans is \n",sm.confusion_matrix(y, km))
 
-#The GaussianMixture scikit-learn class can be used to model this problem 
-#and estimate the parameters of the distributions using the expectation-maximization algorithm.
+
 
 from sklearn import preprocessing
 scaler = preprocessing.StandardScaler()
